@@ -1,4 +1,4 @@
-package com.miniprj.interviewcode.auth;
+package com.miniprj.interviewcode.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -33,6 +33,8 @@ import com.miniprj.interviewcode.repository.IRoleRepository;
 import com.miniprj.interviewcode.repository.IUserRepository;
 import com.miniprj.interviewcode.service.user.impl.UserServiceImpl;
 import com.miniprj.interviewcode.utils.AppException;
+
+import io.swagger.annotations.ApiOperation;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -74,6 +76,7 @@ public class AuthController {
     ApplicationEventPublisher eventPublisher;
     
     @PostMapping("/signin")
+    @ApiOperation(value = "Get generate token", notes = "${AuthController.authenticateUser.notes}")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
